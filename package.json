@@ -41,6 +41,7 @@
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
 		"drizzle-orm": "^0.28.2",
+		"lucide-svelte": "^0.265.0",
 		"open-props": "^1.5.11",
 		"radix-svelte": "^0.9.0",
 		"tailwind-merge": "^1.14.0",

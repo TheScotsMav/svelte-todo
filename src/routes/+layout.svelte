@@ -46,8 +46,7 @@
 
 <div style={data.styling} class="min-h-screen">
 	<Header />
-	{data.current_host}
-	<main>
+	<main class="flex items-center justify-center">
 		<slot />
 	</main>
 </div>

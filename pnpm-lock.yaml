@@ -28,6 +28,9 @@ dependencies:
   drizzle-orm:
     specifier: ^0.28.2
     version: 0.28.2
+  lucide-svelte:
+    specifier: ^0.265.0
+    version: 0.265.0(svelte@4.1.2)
   open-props:
     specifier: ^1.5.11
     version: 1.5.11
@@ -1709,6 +1712,14 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /lucide-svelte@0.265.0(svelte@4.1.2):
+    resolution: {integrity: sha512-rmIcnkvVxCA4xcxsUJ1AVSn3nuowdjgvK0wmdfBqNAaRmvCGqqPekpZMKBOlYLPzWLzwzGwG5A5J9nj9GH3TrQ==}
+    peerDependencies:
+      svelte: '>=3 <5'
+    dependencies:
+      svelte: 4.1.2
+    dev: false
 
   /magic-string@0.27.0:
     resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
