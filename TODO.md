@@ -26,10 +26,8 @@ redis hash - todo data `todo:todo_id`
 
 ```json
 {
-  "id": "todo_id",
-  "title": "todo title",
-  "description": "todo description",
-  "done": false
+	"id": "todo_id",
+	"title": "todo title",
+	"description": "todo description"
 }
 ```
-
