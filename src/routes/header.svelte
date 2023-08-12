@@ -3,10 +3,6 @@
 		{
 			title: 'home',
 			url: '/'
-		},
-		{
-			title: 'something',
-			url: '/something'
 		}
 	];
 </script>
