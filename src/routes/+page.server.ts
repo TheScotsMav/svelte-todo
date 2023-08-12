@@ -51,11 +51,35 @@ export const actions = {
 				await redis.smove(`todos:mav-is-cool`, `todos:mav-is-cool:done`, todo);
 			}
 		} else {
-            const isMemeber = await redis.sismember(`todos:mav-is-cool:done`, todo);
-            if (isMemeber !== 0) {
-                await redis.smove(`todos:mav-is-cool:done`, `todos:mav-is-cool`, todo);
-            }
-        }
+			const isMemeber = await redis.sismember(`todos:mav-is-cool:done`, todo);
+			if (isMemeber !== 0) {
+				await redis.smove(`todos:mav-is-cool:done`, `todos:mav-is-cool`, todo);
+			}
+		}
+	},
+	deletetodo: async (event) => {
+		// TODO update a todo
+		const formData = await event.request.formData();
+		const title = formData.get('title');
+		const id = formData.get('id');
+		const done = formData.get('done');
+
+		const todo = {
+			id,
+			title
+		};
+
+		if (done === 'notDone') {
+			const isMemeber = await redis.sismember(`todos:mav-is-cool`, todo);
+			if (isMemeber !== 0) {
+				await redis.srem(`todos:mav-is-cool`, JSON.stringify(todo));
+			}
+		} else {
+			const isMemeber = await redis.sismember(`todos:mav-is-cool:done`, todo);
+			if (isMemeber !== 0) {
+				await redis.srem(`todos:mav-is-cool:done`, JSON.stringify(todo));
+			}
+		}
 	}
 } satisfies Actions;
 
