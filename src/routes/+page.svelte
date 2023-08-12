@@ -14,30 +14,6 @@
 	import { Label } from '$components/ui/label';
 	import type { PageData } from './$types';
 	// export let data: PageData;
-	type Todo = {
-		id: number;
-		title: string;
-		description?: string;
-		done: boolean;
-	};
-
-	let todos: Todo[] = [
-		{
-			id: 1,
-			title: 'Learn Svelte',
-			done: false
-		},
-		{
-			id: 2,
-			title: 'Learn SvelteKit',
-			done: false
-		},
-		{
-			id: 3,
-			title: 'Learn TypeScript',
-			done: false
-		}
-	];
 
 	export let data: PageData;
 </script>
@@ -51,17 +27,52 @@
 </div>
 
 <!-- {data.props.todos[0].id} -->
-
+<h3 class="text-2xl font-bold mt-4">Todo</h3>
 <div class="container grid grid-cols-3 gap-4 mx-4 mt-4 md:mx-0">
-	{#each data.props.todos as todo (todo.id)}
+	{#each data.props.todos.todos as todo (todo.id)}
 		<Card>
 			<CardHeader>
 				<CardTitle>{todo.title}</CardTitle>
 				{#if todo.description}<CardDescription>{todo.description}</CardDescription>{/if}
 			</CardHeader>
 			<CardContent>
-				<Checkbox id={`${todo.title}-`} checked={todo.done} />
-				<Label for={`${todo.title}-`}>Done</Label>
+				<form method="post" action="?/updatetodo">
+					<Checkbox
+						id={`${todo.id}-checked`}
+						name="done"
+						checked={false}
+						type="submit"
+						value="notDone"
+					/>
+					<Label for={`${todo.id}-checked`}>Done</Label>
+					<input type="hidden" name="id" value={todo.id} />
+					<input type="hidden" name="title" value={todo.title} />
+				</form>
+			</CardContent>
+		</Card>
+	{/each}
+</div>
+<h3 class="text-2xl font-bold mt-4">Done</h3>
+<div class="container grid grid-cols-3 gap-4 mx-4 mt-4 md:mx-0">
+	{#each data.props.todos.done as todo (todo.id)}
+		<Card>
+			<CardHeader>
+				<CardTitle>{todo.title}</CardTitle>
+				{#if todo.description}<CardDescription>{todo.description}</CardDescription>{/if}
+			</CardHeader>
+			<CardContent>
+				<form method="post" action="?/updatetodo">
+					<Checkbox
+						id={`${todo.id}-checked`}
+						name="done"
+						checked={true}
+						type="submit"
+						value="notDone"
+					/>
+					<Label for={`${todo.id}-checked`}>Done</Label>
+					<input type="hidden" name="id" value={todo.id} />
+					<input type="hidden" name="title" value={todo.title} />
+				</form>
 			</CardContent>
 		</Card>
 	{/each}

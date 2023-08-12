@@ -2,6 +2,14 @@ import type { Actions, PageServerLoad } from './$types';
 import redis from '$lib/redis';
 
 export const actions = {
+	sayhello: async (event) => {
+		const formData = await event.request.formData();
+		const title = formData.get('title');
+		// const description = formData.get('description');
+		const id = formData.get('id');
+		const checked = formData.get('done');
+		console.log('formData', checked);
+	},
 	addtodo: async (event) => {
 		// TODO add a todo
 		const formData = await event.request.formData();
@@ -14,8 +22,7 @@ export const actions = {
 
 		const todoToAdd = {
 			id: Math.random().toString(36).slice(2),
-			title: todo,
-			done: false
+			title: todo
 		};
 
 		const addToSet = await redis.sadd(`todos:mav-is-cool`, todoToAdd);
@@ -25,22 +32,52 @@ export const actions = {
 		}
 
 		// return new Response('OK');
+	},
+	updatetodo: async (event) => {
+		// TODO update a todo
+		const formData = await event.request.formData();
+		const title = formData.get('title');
+		const id = formData.get('id');
+		const done = formData.get('done');
+
+		const todo = {
+			id,
+			title
+		};
+
+		if (done === 'notDone') {
+			const isMemeber = await redis.sismember(`todos:mav-is-cool`, todo);
+			if (isMemeber !== 0) {
+				await redis.smove(`todos:mav-is-cool`, `todos:mav-is-cool:done`, todo);
+			}
+		} else {
+            const isMemeber = await redis.sismember(`todos:mav-is-cool:done`, todo);
+            if (isMemeber !== 0) {
+                await redis.smove(`todos:mav-is-cool:done`, `todos:mav-is-cool`, todo);
+            }
+        }
 	}
 } satisfies Actions;
 
 export const load: PageServerLoad = async (event) => {
-	// TODO get the user's todos
 	const todos = (await redis.smembers(`todos:mav-is-cool`)) as unknown as {
 		id: string;
 		title: string;
 		description?: string;
-		done: boolean;
 	}[];
 
-	console.log('todos', todos[0].id);
+	const doneTodos = (await redis.smembers(`todos:mav-is-cool:done`)) as unknown as {
+		id: string;
+		title: string;
+		description?: string;
+	}[];
+
 	return {
 		props: {
-			todos
+			todos: {
+				todos,
+				done: doneTodos
+			}
 		}
 	};
 };
