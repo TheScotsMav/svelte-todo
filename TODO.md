@@ -18,11 +18,8 @@ How are we storing and retrieving todos?
 
 - We need to store todos in a database
 - We need to retrieve todos from a database
-- We need to update todos in a database
-- We need to delete todos from a database
-
-redis set - todo IDs `todos:user_id`
-redis hash - todo data `todo:todo_id`
+- We ned teed to update todos in a database
+- We neo delete todos from a database
 
 ```json
 {

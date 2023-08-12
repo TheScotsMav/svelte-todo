@@ -6,7 +6,7 @@
 	export let data: PageData;
 </script>
 
-<div style={data.styling} class="min-h-screen">
+<div class="min-h-screen">
 	<Header />
 	<main class="flex flex-col items-center justify-center">
 		<slot />

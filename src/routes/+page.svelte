@@ -30,7 +30,7 @@
 
 <!-- {data.props.todos[0].id} -->
 <h3 class="text-2xl font-bold mt-4">Todo</h3>
-<div class="container grid grid-cols-3 gap-4 mx-4 mt-4 md:mx-0">
+<div class="container grid grid-cols-1 md:grid-cols-3 gap-4 mx-4 mt-4 md:mx-0">
 	{#each data.props.todos.todos as todo (todo.id)}
 		<Card class="relative">
 			<CardHeader>
@@ -38,7 +38,7 @@
 				{#if todo.description}<CardDescription>{todo.description}</CardDescription>{/if}
 			</CardHeader>
 			<CardContent>
-				<form method="post" action="?/updatetodo" use:enhance>
+				<form method="post" action="?/updatetodo" class="flex gap-2 items-center" use:enhance>
 					<Checkbox
 						id={`${todo.id}-checked`}
 						name="done"
@@ -63,7 +63,7 @@
 	{/each}
 </div>
 <h3 class="text-2xl font-bold mt-4">Done</h3>
-<div class="container grid grid-cols-3 gap-4 mx-4 mt-4 md:mx-0">
+<div class="container grid grid-cols-1 md:grid-cols-3 gap-4 mx-4 mt-4 md:mx-0">
 	{#each data.props.todos.done as todo (todo.id)}
 		<Card class="relative">
 			<CardHeader>
@@ -71,7 +71,7 @@
 				{#if todo.description}<CardDescription>{todo.description}</CardDescription>{/if}
 			</CardHeader>
 			<CardContent>
-				<form method="post" action="?/updatetodo" use:enhance>
+				<form method="post" action="?/updatetodo" class="flex gap-2 items-center" use:enhance>
 					<Checkbox
 						id={`${todo.id}-checked`}
 						name="done"
