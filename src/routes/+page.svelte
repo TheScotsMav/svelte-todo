@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { scale } from 'svelte/transition';
+
 	import { enhance } from '$app/forms';
+	import TodoItem from '$components/TodoItem.svelte';
 
 	// import type { PageData } from './$types';
 	import { Button } from '$components/ui/button';
@@ -32,66 +35,16 @@
 <h3 class="text-2xl font-bold mt-4">Todo</h3>
 <div class="container grid grid-cols-1 md:grid-cols-3 gap-4 mx-4 mt-4 md:mx-0">
 	{#each data.props.todos.todos as todo (todo.id)}
-		<Card class="relative">
-			<CardHeader>
-				<CardTitle>{todo.title}</CardTitle>
-				{#if todo.description}<CardDescription>{todo.description}</CardDescription>{/if}
-			</CardHeader>
-			<CardContent>
-				<form method="post" action="?/updatetodo" class="flex gap-2 items-center" use:enhance>
-					<Checkbox
-						id={`${todo.id}-checked`}
-						name="done"
-						checked={false}
-						type="submit"
-						value="notDone"
-					/>
-					<Label for={`${todo.id}-checked`}>Done</Label>
-					<input type="hidden" name="id" value={todo.id} />
-					<input type="hidden" name="title" value={todo.title} />
-				</form>
-			</CardContent>
-			<div class="absolute top-2 right-4">
-				<form method="post" action="?/deletetodo" use:enhance>
-					<input type="hidden" name="id" value={todo.id} />
-					<input type="hidden" name="done" value="notDone" />
-					<input type="hidden" name="title" value={todo.title} />
-					<button type="submit" class="flex-shrink-0 justify-center items-center">×</button>
-				</form>
-			</div>
-		</Card>
+		<div in:scale out:scale>
+			<TodoItem {todo} done="notDone" />
+		</div>
 	{/each}
 </div>
 <h3 class="text-2xl font-bold mt-4">Done</h3>
 <div class="container grid grid-cols-1 md:grid-cols-3 gap-4 mx-4 mt-4 md:mx-0">
 	{#each data.props.todos.done as todo (todo.id)}
-		<Card class="relative">
-			<CardHeader>
-				<CardTitle>{todo.title}</CardTitle>
-				{#if todo.description}<CardDescription>{todo.description}</CardDescription>{/if}
-			</CardHeader>
-			<CardContent>
-				<form method="post" action="?/updatetodo" class="flex gap-2 items-center" use:enhance>
-					<Checkbox
-						id={`${todo.id}-checked`}
-						name="done"
-						checked={true}
-						type="submit"
-						value="notDone"
-					/>
-					<Label for={`${todo.id}-checked`}>Done</Label>
-					<input type="hidden" name="id" value={todo.id} />
-					<input type="hidden" name="title" value={todo.title} />
-				</form>
-			</CardContent>
-			<div class="absolute top-2 right-4">
-				<form method="post" action="?/deletetodo" use:enhance>
-					<input type="hidden" name="id" value={todo.id} />
-					<input type="hidden" name="done" value="done" />
-					<input type="hidden" name="title" value={todo.title} />
-					<button type="submit" class="flex-shrink-0 justify-center items-center">×</button>
-				</form>
-			</div>
-		</Card>
+		<div in:scale out:scale>
+			<TodoItem {todo} done="done" />
+		</div>
 	{/each}
 </div>
