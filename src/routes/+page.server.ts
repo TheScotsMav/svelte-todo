@@ -2,20 +2,10 @@ import type { Actions, PageServerLoad } from './$types';
 import redis from '$lib/redis';
 
 export const actions = {
-	sayhello: async (event) => {
-		const formData = await event.request.formData();
-		const title = formData.get('title');
-		// const description = formData.get('description');
-		const id = formData.get('id');
-		const checked = formData.get('done');
-		console.log('formData', checked);
-	},
 	addtodo: async (event) => {
 		// TODO add a todo
 		const formData = await event.request.formData();
 		const todo = formData.get('title');
-
-		console.log('todo', todo);
 		if (!todo) {
 			// return new Response('No todo provided', { status: 400 });
 		}

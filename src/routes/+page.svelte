@@ -1,23 +1,13 @@
 <script lang="ts">
-	import { scale } from 'svelte/transition';
-
 	import { enhance } from '$app/forms';
 	import TodoItem from '$components/TodoItem.svelte';
 
 	// import type { PageData } from './$types';
 	import { Button } from '$components/ui/button';
-	import {
-		Card,
-		CardContent,
-		CardDescription,
-		CardFooter,
-		CardHeader,
-		CardTitle
-	} from '$components/ui/card';
-	import { Checkbox } from '$components/ui/checkbox';
 	import Input from '$components/ui/input/Input.svelte';
-	import { Label } from '$components/ui/label';
 	import type { PageData } from './$types';
+	import { flip } from 'svelte/animate';
+	import { send, receive } from './transition';
 	// export let data: PageData;
 
 	export let data: PageData;
@@ -35,7 +25,7 @@
 <h3 class="text-2xl font-bold mt-4">Todo</h3>
 <div class="container grid grid-cols-1 md:grid-cols-3 gap-4 mx-4 mt-4 md:mx-0">
 	{#each data.props.todos.todos as todo (todo.id)}
-		<div in:scale out:scale>
+		<div in:receive={{ key: todo.id }} out:send={{ key: todo.id }} animate:flip={{ duration: 200 }}>
 			<TodoItem {todo} done="notDone" />
 		</div>
 	{/each}
@@ -43,7 +33,7 @@
 <h3 class="text-2xl font-bold mt-4">Done</h3>
 <div class="container grid grid-cols-1 md:grid-cols-3 gap-4 mx-4 mt-4 md:mx-0">
 	{#each data.props.todos.done as todo (todo.id)}
-		<div in:scale out:scale>
+		<div in:receive={{ key: todo.id }} out:send={{ key: todo.id }} animate:flip={{ duration: 200 }}>
 			<TodoItem {todo} done="done" />
 		</div>
 	{/each}
