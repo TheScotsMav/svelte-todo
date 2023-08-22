@@ -8,9 +8,9 @@ const config = {
 	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter({
-			runtime: 'edge',
+			runtime: 'nodejs18.x',
 		}),
-	
+
 		alias: {
 			// this will match a file
 			$components: 'src/components'
