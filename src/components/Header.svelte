@@ -1,10 +1,15 @@
-<script>
+<script lang="ts">
+	import { signIn, signOut } from '@auth/sveltekit/client';
+	import type { Session } from '@auth/core/types';
+	import Button from './ui/button/Button.svelte';
+
 	const navItems = [
 		{
 			title: 'home',
 			url: '/'
 		}
 	];
+	export const session: Session | null = null;
 </script>
 
 <header
@@ -19,6 +24,11 @@
 				{#each navItems as navItem}
 					<li><a href={navItem.url}>{navItem.title}</a></li>
 				{/each}
+				{#if session}
+					<li><Button on:click={() => signOut()}>Logout</Button></li>
+				{:else}
+					<li><Button on:click={() => signIn('github')}>Login</Button></li>
+				{/if}
 			</ul>
 		</nav>
 	</div>

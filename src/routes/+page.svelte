@@ -16,7 +16,7 @@
 <div class="flext items-center flex-col justify-center mt-4">
 	<h1 class="text-4xl font-bold text-center">Add todo</h1>
 	<form class="flex mt-4 gap-4 items-center" method="POST" action="?/addtodo" use:enhance>
-		<Input type="text" name="title" placeholder="Title" class="w-full" required />
+		<Input type="text" name="title" placeholder="todo..." class="w-full" required />
 		<Button type="submit" variant="default" class="flex-shrink-0">+ Add todo</Button>
 	</form>
 </div>

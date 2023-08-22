@@ -6,11 +6,11 @@ const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
 	preprocess: vitePreprocess(),
-
 	kit: {
 		adapter: adapter({
 			runtime: 'edge',
 		}),
+	
 		alias: {
 			// this will match a file
 			$components: 'src/components'

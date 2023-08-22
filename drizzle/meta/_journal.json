@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1692724608306,
+      "tag": "0000_round_doctor_doom",
+      "breakpoints": true
+    }
+  ]
+}

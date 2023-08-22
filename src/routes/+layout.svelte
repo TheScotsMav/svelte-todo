@@ -7,7 +7,7 @@
 </script>
 
 <div class="min-h-screen">
-	<Header />
+	<Header session={data.session} />
 	<main class="flex flex-col items-center justify-center">
 		<slot />
 	</main>
